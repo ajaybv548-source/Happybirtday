@@ -105,6 +105,16 @@
       color: #666;
       flex-grow: 1;
     }
+    @media (max-width: 700px) {
+      .gallery-item {
+        min-height: auto; /* Let height follow content */
+      }
+      .gallery-item img {
+        height: auto;
+        max-height: 320px;
+        object-fit: contain; /* Show full image, no cropping */
+      }
+    }
     .wishes {
       display: flex;
       flex-wrap: wrap;
@@ -140,39 +150,6 @@
       font-size: 1rem;
       margin-top: 40px;
     }
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-      p, .card p {
-        font-size: 1rem;
-      }
-      nav .title {
-        font-size: 1.1rem;
-      }
-      .gallery-item img {
-        height: 320px;
-      }
-      .gallery-item {
-        min-height: 400px;
-      }
-      .wish-card {
-        flex: 1 1 100%;
-        min-width: unset;
-      }
-    }
-    @media (max-width: 400px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      p, .card p {
-        font-size: 0.9rem;
-      }
-      nav .title svg {
-        height: 20px;
-        width: 20px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -197,17 +174,17 @@
   <p>Some moments I'll cherish forever</p>
   <div class="gallery" role="list">
     <article class="gallery-item" role="listitem">
-      <img src="imges/img1.jpeg" alt="Romantic sunset beach moment with couple walking hand in hand along the shoreline" />
+      <img src="images/img1.jpeg" alt="Romantic sunset beach moment with couple walking hand in hand along the shoreline" />
       <h3>Holding your hand for my whole life</h3>
       <p>That magical walk where love spoke louder than words</p>
     </article>
     <article class="gallery-item" role="listitem">
-      <img src="imges/img2.jpeg" alt="Couple smiling happily during a romantic candlelit dinner in an elegant restaurant" />
+      <img src="images/img2.jpeg" alt="Couple smiling happily during a romantic candlelit dinner in an elegant restaurant" />
       <h3>The first picture with you</h3>
       <p>Wrapped in culture, wrapped in love, forever by your side</p>
     </article>
     <article class="gallery-item" role="listitem">
-      <img src="imges/img3.jpeg" alt="Happy couple laughing together in a field of flowers during springtime" />
+      <img src="images/img3.jpeg" alt="Happy couple laughing together in a field of flowers during springtime" />
       <h3>The day I was obsessed on you</h3>
       <p>Every glance, every smile, a memory etched in my heart</p>
     </article>
