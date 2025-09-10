@@ -1,113 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Wish for My Love</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-   
-</head>
-<body>
-    <div id="particles-js"></div>
-    <div class="floating-hearts" id="floatingHearts"></div>
-    <div class="petals" id="petalsContainer"></div>
-    
-    
-    <div class="container">
-        <div class="progress-bar">
-            <div class="progress" id="progressBar"></div>
-        </div>
+import React, { useState, useEffect } from 'react';
+import { Heart, Sparkles, Camera, Gift } from 'lucide-react';
 
-        <!-- Step 1: Greeting -->
-        <div class="step" id="step1">
-            <h1>Happy Birthday, My Love!</h1>
-            <p>I've created something magical just for you.</p>
-            <p>Are you ready to begin this special journey?</p>
-            <img src="https://png.pngtree.com/png-vector/20250422/ourmid/pngtree-cute-girl-holding-birthday-cake-smiling-cheerfully-png-image_16067658.png" style="height: 200px;width: 200px;" alt="">
-            <button class="btn" onclick="nextStep()">Open Your Gift</button>
-        </div>
+const BirthdayWishes = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-        <!-- Step 2: Name Input -->
-        <div class="step" id="step2">
-            <h2>Let's Make This Personal</h2>
-            <p>What's the name of the most beautiful birthday girl in the world?</p>
-            <input type="text" class="name-input" id="nameInput" placeholder="Enter your name">
-            <button class="btn" onclick="saveName()">Continue</button>
-        </div>
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
 
-        <!-- Step 3: Heart Animation -->
-        <div class="step" id="step3">
-            <h2>For You, <span id="displayName">My Love</span></h2>
-            <p>Click on the heart to feel my love for you!</p>
-            <div class="heart" id="interactiveHeart" onclick="createHearts()"></div>
-            <div id="heartMessage" class="message-box">
-                <p>Every beat of my heart whispers your name, <span id="heartName">my love</span>.</p>
+    return () => clearInterval(timer);
+  }, []);
+
+  const isBirthday = currentTime.getMonth() === currentTime.getMonth() && currentTime.getDate() === currentTime.getDate();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100 font-sans">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-1">
+            <Sparkles className="h-6 w-6 text-pink-500" />
+            <span className="text-xl font-bold text-pink-600">Happy Birthday</span>
+          </div>
+          <div className="flex space-x-4">
+            <button className="text-pink-600 hover:text-pink-700 transition-colors">
+              <Heart className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <div className="w-24 h-24 mx-auto mb-6 bg-pink-200 rounded-full flex items-center justify-center">
+              <Sparkles className="h-12 w-12 text-pink-500" />
             </div>
-            <button class="btn" onclick="nextStep()">Continue to Your Message</button>
+            <h1 className="text-5xl md:text-6xl font-bold text-pink-700 mb-4">
+              Happy Birthday, My Love!
+            </h1>
+            <p className="text-xl text-pink-600 mb-8">
+              {isBirthday 
+                ? "Today is your special day! 🎉" 
+                : "Celebrating you today and always"
+              }
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              To the most amazing woman in my life, today we celebrate you and all the joy you bring to everyone around you. 
+              Your smile lights up my world, your laughter is my favorite melody, and your love is the greatest gift I could ever receive.
+            </p>
+            <div className="flex justify-center">
+              <div className="bg-pink-100 rounded-full p-3">
+                <Heart className="h-8 w-8 text-pink-600 fill-pink-600" />
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <!-- Step 4: Birthday Message -->
-        <div class="step" id="step4">
-            <h2>My Special Message For You</h2>
-            <div class="photo-frame">
-                <!-- Replace with your image path -->
-                <img src="https://medias.artmajeur.com/standard/17262319_a-cutel-european-girl-full-bodycartoon-style-illustration-drawn-with-posca-markers-pretty-face-586679414-1.jpg?v=1738402496" alt="Beautiful You">
-            </div>
-            <div id="typedMessage" class="message-box">
-                <p class="typing-effect" id="typingText"></p>
-            </div>
-            <button class="btn" onclick="nextStep()">See Your Surprise</button>
-        </div>
+      {/* Memory Gallery */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-700 mb-4">Beautiful Memories</h2>
+            <p className="text-gray-600">Some moments I'll cherish forever</p>
+          </div>
 
-        <!-- Step 5: Memory Lane -->
-        <div class="step" id="step5">
-            <h2>Our Special Moments</h2>
-            <p>Some memories I'll cherish forever...</p>
-            <div class="memory-container">
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Memory 1">
-                    <div class="polaroid-caption">Our First Date</div>
-                </div>
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Memory 2">
-                    <div class="polaroid-caption">Summer Days</div>
-                </div>
-               
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Memory 1 */}
+            <div className="bg-pink-50 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9c5e648e-07a8-4600-8ae2-1f9610b63175.png" 
+                  alt="Romantic sunset beach moment with couple walking hand in hand along the shoreline" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold text-pink-700 mb-2">Beach Sunset</h3>
+                <p className="text-sm text-gray-600">That beautiful evening we watched the sunset together</p>
+              </div>
             </div>
-            <button class="btn" onclick="nextStep()">Your Final Surprise</button>
-        </div>
 
-        <!-- Step 6: Final Wish -->
-        <div class="step" id="step6">
-            <h1>🎉 Happy Birthday, <span id="finalName">My Love 💖</span>! 🎂</h1>
-        
-            <p>✨ May your day be filled with endless joy, sweet laughter, and all the love your heart can hold ✨</p>
-            <p>🌟 You light up my world just by being in it — like a million stars in my sky. 🌌</p>
-        
-            <p>⏳ Counting every moment until I can hold you and celebrate this magical day together! 🥰</p>
-        
-            <p>💌 With all my love, forever and always... 💫</p>
-        
-            <div class="signature">Yours truly, 💋</div>
-        
-            <div class="social-share">
-                <div class="social-icon" onclick="shareOnSocial('facebook')" title="Share on Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </div>
-                <div class="social-icon" onclick="shareOnSocial('twitter')" title="Share on Twitter">
-                    <i class="fab fa-twitter"></i>
-                </div>
-                <div class="social-icon" onclick="shareOnSocial('whatsapp')" title="Share on WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
+            {/* Memory 2 */}
+            <div className="bg-pink-50 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/55e9dc5d-aa13-48ba-b1e7-d869adfef007.png" 
+                  alt="Couple smiling happily during a romantic candlelit dinner in an elegant restaurant" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold text-pink-700 mb-2">Candlelit Dinner</h3>
+                <p className="text-sm text-gray-600">Our special anniversary celebration night</p>
+              </div>
             </div>
+
+            {/* Memory 3 */}
+            <div className="bg-pink-50 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/425f7a29-e0df-4dc2-872b-bd79cee61cad.png" 
+                  alt="Happy couple laughing together in a field of flowers during springtime" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold text-pink-700 mb-2">Spring Blooms</h3>
+                <p className="text-sm text-gray-600">Our lovely picnic among the flowers</p>
+              </div>
+            </div>
+          </div>
         </div>
-        
+      </section>
+
+      {/* Love Message Section */}
+      <section className="py-16 px-4 bg-gradient-to-br from-pink-100 to-rose-200">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+            <div className="mb-8">
+              <Heart className="h-12 w-12 text-pink-600 fill-pink-600 mx-auto mb-4" />
+              <h2 className="text-3xl md:text-4xl font-bold text-pink-700 mb-4">My Heart to Yours</h2>
+            </div>
+            
+            <div className="space-y-6 text-left">
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Every day with you feels like a blessing. Your kindness, your strength, and your beautiful soul continue to amaze me.
+                I feel so lucky to have you in my life and to share these precious moments together.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed">
+                On your special day, I want you to know how much you mean to me. You're not just my girlfriend - you're my best friend,
+                my partner, and the love of my life. May this year bring you all the happiness and success you deserve.
+              </p>
+              
+              <p className="text-lg text-gray-700 leading-relaxed font-semibold text-pink-700">
+                Happy Birthday, my darling. I love you more than words can express.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Birthday Wishes */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <Gift className="h-12 w-12 text-pink-600 mx-auto mb-4" />
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-700 mb-4">Birthday Wishes</h2>
+            <p className="text-gray-600">May all your dreams and wishes come true</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-rose-50 rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Sparkles className="h-8 w-8 text-pink-600" />
+              </div>
+              <h3 className="font-semibold text-pink-700 mb-3">Health & Happiness</h3>
+              <p className="text-gray-700">Wishing you a year filled with good health, joy, and endless laughter</p>
+            </div>
+
+            <div className="bg-rose-50 rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="h-8 w-8 text-pink-600 fill-pink-600" />
+              </div>
+              <h3 className="font-semibold text-pink-700 mb-3">Love & Success</h3>
+              <p className="text-gray-700">May your heart always be full of love and your path filled with success</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-pink-700 text-white py-8 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="mb-4">Made with ❤️ for the most special person in my life</p>
+          <p className="text-pink-200">Happy Birthday, my love! 🌸</p>
+        </div>
+      </footer>
     </div>
-  <script src="script.js"></script>
-</body>
-</html>
+  );
+};
+
+export default BirthdayWishes;
