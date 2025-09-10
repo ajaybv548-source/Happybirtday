@@ -1,198 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Birthday Wishes</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-  /* Reset & base */
-  body, html {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to bottom right, #ffe4e6, #fbcfe8);
-    color: #831843;
-    min-height: 100vh;
-  }
-  img {
-    max-width: 100%;
-    display: block;
-  }
-  /* Navigation */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(255 255 255 / 0.8);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 8px rgba(0 0 0 / 0.1);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-  }
-  nav .title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #db2777;
-    display: flex;
-    align-items: center;
-  }
-  nav .title svg {
-    height: 24px;
-    width: 24px;
-    margin-right: 8px;
-    stroke: #db2777;
-    stroke-width: 2;
-    fill: none;
-  }
-
-  /* Container sections */
-  section {
-    max-width: 900px;
-    margin: 100px auto 40px auto;
-    padding: 0 20px;
-    text-align: center;
-  }
-
-  /* Hero heading */
-  h1 {
-    font-size: 3rem;
-    color: #c026d3;
-    margin-bottom: 8px;
-  }
-  #birthdayMessage {
-    font-size: 1.25rem;
-    color: #6b21a8;
-    margin-bottom: 40px;
-  }
-  .message-box {
-    background: white;
-    border-radius: 20px;
-    padding: 30px 25px;
-    color: #444;
-    font-size: 1.1rem;
-    box-shadow: 0 5px 20px rgba(219, 39, 119, 0.15);
-    max-width: 650px;
-    margin: 0 auto 60px auto;
-    text-align: left;
-    line-height: 1.5;
-  }
-  .message-box strong {
-    color: #db2777;
-  }
-
-  /* Memories gallery */
-  .gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    margin-top: 40px;
-  }
-  @media(min-width: 700px) {
-    .gallery {
-      grid-template-columns: repeat(3, 1fr);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Wishes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom right, #ffe4e6, #fbcfe8);
+      color: #831843;
+      min-height: 100vh;
     }
-  }
-  .gallery-item {
-    background: #fce7f3;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(219, 39, 119, 0.2);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  .gallery-item:hover {
-    transform: scale(1.05);
-  }
-  .gallery-item img {
-    height: 180px;
-    width: 100%;
-    object-fit: cover;
-    border-bottom: 2px solid #db2777;
-  }
-  .gallery-item h3 {
-    color: #831843;
-    font-weight: 700;
-    margin: 14px 16px 2px 16px;
-    font-size: 1.15rem;
-  }
-  .gallery-item p {
-    color: #5c5c5c;
-    font-size: 0.9rem;
-    margin: 0 16px 14px 16px;
-  }
-
-  /* Love message */
-  .love-message {
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 6px 25px rgba(219, 39, 119, 0.12);
-    max-width: 700px;
-    margin: 60px auto 80px auto;
-    color: #444;
-    text-align: left;
-    line-height: 1.6;
-  }
-  .love-message h2 {
-    text-align: center;
-    color: #db2777;
-    margin-bottom: 24px;
-    font-size: 2.5rem;
-  }
-  .love-message p {
-    margin-bottom: 24px;
-  }
-  .love-message p.strong {
-    font-weight: 700;
-    color: #c026d3;
-  }
-
-  /* Birthday Wishes Grid */
-  .wishes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 720px;
-    margin: 0 auto 60px auto;
-  }
-  .wish-card {
-    background: #fce7f3;
-    flex: 1 1 300px;
-    border-radius: 20px;
-    padding: 26px 20px;
-    box-shadow: 0 3px 15px rgba(219, 39, 119, 0.15);
-    text-align: center;
-    color: #831843;
-  }
-  .wish-card h3 {
-    margin-top: 0;
-    font-weight: 700;
-  }
-  .wish-card p {
-    color: #555;
-    margin-top: 10px;
-  }
-
-  /* Footer */
-  footer {
-    background: #831843;
-    color: #f9d5e5;
-    text-align: center;
-    padding: 18px 10px;
-    font-size: 1rem;
-  }
-</style>
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      background-color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      z-index: 999;
+    }
+    nav .title {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: #db2777;
+    }
+    nav .title svg {
+      height: 24px; width: 24px;
+      margin-right: 6px;
+      fill: #db2777;
+    }
+    section {
+      max-width: 900px;
+      margin: 80px auto 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: #c026d3;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #6b21a8;
+    }
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 24px;
+      margin: 1rem auto;
+      box-shadow: 0 4px 20px rgba(219,39,119,0.15);
+      max-width: 600px;
+      text-align: left;
+      color: #444;
+    }
+    .card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 2rem 0;
+    }
+    .gallery-item {
+      width: 280px;
+      background: #fdf0f9;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(219,39,119,0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-height: 550px;           /* increased card height */
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+    .gallery-item img {
+      width: 100%;
+      object-fit: cover;
+      height: 450px;               /* increased image height */
+      border-bottom: 2px solid #db2777;
+      display: block;
+    }
+    .gallery-item h3 {
+      margin: 12px 12px 6px 12px;
+      font-weight: 600;
+      color: #831843;
+    }
+    .gallery-item p {
+      margin: 0 12px 12px 12px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @media (max-width: 700px) {
+      .gallery-item {
+        min-height: 450px;
+      }
+      .gallery-item img {
+        height: 320px;
+      }
+    }
+    footer {
+      background-color: #831843;
+      color: #f9d5e5;
+      padding: 16px 0;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <div class="title" aria-label="Website title">
-    <svg viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-      <path d="M12 2l1.5 4.5L18 8l-3.75 3.25 1.25 4.75L12 13.5l-3.5 2.5 1.25-4.75L6 8l4.5-1.5L12 2z"></path>
-    </svg>
+  <div class="title">
+    <!-- Sparkles icon SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l1.5 4.5L18 8l-3.75 3.25 1.25 4.75L12 13.5l-3.5 2.5 1.25-4.75L6 8l4.5-1.5L12 2z"/></svg>
     Happy Birthday
   </div>
 </nav>
@@ -200,56 +137,68 @@
 <section>
   <h1>Happy Birthday, My Love!</h1>
   <p id="birthdayMessage">Checking date...</p>
-
-  <div class="message-box">
-    To the most amazing woman in my life, today we celebrate you and all the joy you bring to everyone around you. 
-    Your smile lights up my world, your laughter is my favorite melody, and your love is the greatest gift I could ever receive.
+  <div class="card">
+    <p>
+      To the most amazing woman in my life, today we celebrate you and all the joy you bring to everyone around you. 
+      Your smile lights up my world, your laughter is my favorite melody, and your love is the greatest gift I could ever receive.
+    </p>
   </div>
 </section>
 
 <section>
-  <h2>Beautiful Memories</h2>
+  <h2>Beautiful Memories in our life</h2>
   <p>Some moments I'll cherish forever</p>
-
-  <div class="gallery" role="list">
-    <article class="gallery-item" role="listitem">
-      <img src="img1" alt="First Time Holding your hand in a moon light, taking with me " />
-      <h3>Beach Sunset</h3>
-      <p>That beautiful evening we watched the sunset together</p>
-    </article>
-
-    <article class="gallery-item" role="listitem">
-      <img src="images/candlelit-dinner.png" alt="Couple smiling happily during a romantic candlelit dinner in an elegant restaurant" />
-      <h3>Candlelit Dinner</h3>
-      <p>Our special anniversary celebration night</p>
-    </article>
-
-    <article class="gallery-item" role="listitem">
-      <img src="images/spring-blooms.png" alt="Happy couple laughing together in a field of flowers during springtime" />
-      <h3>Spring Blooms</h3>
-      <p>Our lovely picnic among the flowers</p>
-    </article>
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="imges/img1.jpeg" />
+      <h3>Holding your hand  for my whole life</h3>
+      <p>That magical walk where love spoke louder than words</p>
+    </div>
+    <div class="gallery-item">
+      <img src="imges/img2.jpeg"  />
+      <h3>The first picture with you</h3>
+      <p>Wrapped in culture, wrapped in love, forever by your side</p>
+    </div>
+    <div class="gallery-item">
+      <img src="imges/img3.jpeg" />
+      <h3>The day i was obsessed on you</h3>
+      <p>Every glance, every smile, a memory etched in my heart</p>
+    </div>
   </div>
 </section>
 
 <section>
   <h2>My Heart to Yours</h2>
-  <div class="love-message">
-    <p>Every day with you feels like a blessing. Your kindness, your strength, and your beautiful soul continue to amaze me. I feel so lucky to have you in my life and to share these precious moments together.</p>
-    <p>On your special day, I want you to know how much you mean to me. You're not just my girlfriend - you're my best friend, my partner, and the love of my life. May this year bring you all the happiness and success you deserve.</p>
-    <p class="strong">Happy Birthday, my darling. I love you more than words can express.</p>
+  <div class="card" style="max-width: 700px; margin: auto;">
+    <p>
+      Happy Birthday, my dear wife! 🎂❤️
+
+I feel so blessed to have you in my life and I truly am the happiest person in the world because of you 🌍✨. May all your wishes come true, and may God bless you with everything you desire 🙏💫.
+
+Thank you so much for choosing me as your life partner and for standing by me through all my ups and downs 🤝❤️. Thank you for understanding me, even with my anger issues 😔💭. I know our relationship isn’t always perfect, but I believe we will sort everything out together and grow stronger 💪💑.
+
+I pray that God keeps you happy always 🙌💕. Right now, I may not be able to give you the life you dream of, but I promise you that soon I will work hard to give you the life and happiness you truly deserve 🌹💍.
+
+Let’s walk this journey together, achieve our dreams, and cherish every moment 🤗💖. I’m sorry if I have ever hurt you—please forgive my mistakes 🙏😢. All I want is to see you happy, no matter what 💕.
+
+On this special day, be happy, smile, and let everything you love come to you 🥰🎁🎉.
+Love you so much, ma ❤️😘.
+    </p>
+    <p style="font-weight: 700; color: #db2777;">
+      Happy Birthday, my Rakashashi. I love you more than words can express.
+    </p>
   </div>
 </section>
 
 <section>
   <h2>Birthday Wishes</h2>
-  <div class="wishes">
-    <div class="wish-card">
-      <h3>Health &amp; Happiness</h3>
+  <div style="display: flex; justify-content:center; gap: 30px; flex-wrap: wrap; max-width: 700px; margin: auto;">
+    <div style="background: #fce7f3; padding: 20px; border-radius: 20px; flex:1 1 280px; text-align:center;">
+      <h3 style="color:#db2777;">Health & Happiness</h3>
       <p>Wishing you a year filled with good health, joy, and endless laughter</p>
     </div>
-    <div class="wish-card">
-      <h3>Love &amp; Success</h3>
+    <div style="background: #fce7f3; padding: 20px; border-radius: 20px; flex:1 1 280px; text-align:center;">
+      <h3 style="color:#db2777;">Love & Success</h3>
       <p>May your heart always be full of love and your path filled with success</p>
     </div>
   </div>
@@ -260,24 +209,23 @@
 </footer>
 
 <script>
-  // Birthday check: set month and day (0-indexed month)
-  const birthdayMonth = 8;  // September (0 = Jan, 8 = Sept)
-  const birthdayDay = 10;
-
-  const birthdayMessageEl = document.getElementById('birthdayMessage');
+  // Set the fixed birthday date here (0-based month, day)
+  const birthdayMonth = 8;  // September
+  const birthdayDate = 10;
 
   function updateBirthdayMessage() {
     const today = new Date();
-    if (today.getMonth() === birthdayMonth && today.getDate() === birthdayDay) {
-      birthdayMessageEl.textContent = "Today is your special day! 🎉";
+    const messageElem = document.getElementById('birthdayMessage');
+    if (today.getMonth() === birthdayMonth && today.getDate() === birthdayDate) {
+      messageElem.textContent = "Today is your special day! 🎉";
     } else {
-      birthdayMessageEl.textContent = "Celebrating you today and always";
+      messageElem.textContent = "Celebrating you today and always";
     }
   }
 
-  updateBirthdayMessage();
+  updateBirthdayMessage(); // initial call
 
-  // Optional: Update message every minute
+  // Optional: Update the message at midnight automatically
   setInterval(updateBirthdayMessage, 60000);
 </script>
 
