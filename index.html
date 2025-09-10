@@ -1,191 +1,285 @@
-import React, { useState, useEffect } from 'react';
-import { Heart, Sparkles, Camera, Gift } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Birthday Wishes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  /* Reset & base */
+  body, html {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom right, #ffe4e6, #fbcfe8);
+    color: #831843;
+    min-height: 100vh;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255 255 255 / 0.8);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0 0 0 / 0.1);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+  }
+  nav .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #db2777;
+    display: flex;
+    align-items: center;
+  }
+  nav .title svg {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+    stroke: #db2777;
+    stroke-width: 2;
+    fill: none;
+  }
 
-const BirthdayWishes = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  /* Container sections */
+  section {
+    max-width: 900px;
+    margin: 100px auto 40px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
+  /* Hero heading */
+  h1 {
+    font-size: 3rem;
+    color: #c026d3;
+    margin-bottom: 8px;
+  }
+  #birthdayMessage {
+    font-size: 1.25rem;
+    color: #6b21a8;
+    margin-bottom: 40px;
+  }
+  .message-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 25px;
+    color: #444;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 20px rgba(219, 39, 119, 0.15);
+    max-width: 650px;
+    margin: 0 auto 60px auto;
+    text-align: left;
+    line-height: 1.5;
+  }
+  .message-box strong {
+    color: #db2777;
+  }
 
-    return () => clearInterval(timer);
-  }, []);
+  /* Memories gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media(min-width: 700px) {
+    .gallery {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .gallery-item {
+    background: #fce7f3;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(219, 39, 119, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: scale(1.05);
+  }
+  .gallery-item img {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+    border-bottom: 2px solid #db2777;
+  }
+  .gallery-item h3 {
+    color: #831843;
+    font-weight: 700;
+    margin: 14px 16px 2px 16px;
+    font-size: 1.15rem;
+  }
+  .gallery-item p {
+    color: #5c5c5c;
+    font-size: 0.9rem;
+    margin: 0 16px 14px 16px;
+  }
 
-  const isBirthday = currentTime.getMonth() === currentTime.getMonth() && currentTime.getDate() === currentTime.getDate();
+  /* Love message */
+  .love-message {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 25px rgba(219, 39, 119, 0.12);
+    max-width: 700px;
+    margin: 60px auto 80px auto;
+    color: #444;
+    text-align: left;
+    line-height: 1.6;
+  }
+  .love-message h2 {
+    text-align: center;
+    color: #db2777;
+    margin-bottom: 24px;
+    font-size: 2.5rem;
+  }
+  .love-message p {
+    margin-bottom: 24px;
+  }
+  .love-message p.strong {
+    font-weight: 700;
+    color: #c026d3;
+  }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100 font-sans">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center space-x-1">
-            <Sparkles className="h-6 w-6 text-pink-500" />
-            <span className="text-xl font-bold text-pink-600">Happy Birthday</span>
-          </div>
-          <div className="flex space-x-4">
-            <button className="text-pink-600 hover:text-pink-700 transition-colors">
-              <Heart className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </nav>
+  /* Birthday Wishes Grid */
+  .wishes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 720px;
+    margin: 0 auto 60px auto;
+  }
+  .wish-card {
+    background: #fce7f3;
+    flex: 1 1 300px;
+    border-radius: 20px;
+    padding: 26px 20px;
+    box-shadow: 0 3px 15px rgba(219, 39, 119, 0.15);
+    text-align: center;
+    color: #831843;
+  }
+  .wish-card h3 {
+    margin-top: 0;
+    font-weight: 700;
+  }
+  .wish-card p {
+    color: #555;
+    margin-top: 10px;
+  }
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <div className="w-24 h-24 mx-auto mb-6 bg-pink-200 rounded-full flex items-center justify-center">
-              <Sparkles className="h-12 w-12 text-pink-500" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-pink-700 mb-4">
-              Happy Birthday, My Love!
-            </h1>
-            <p className="text-xl text-pink-600 mb-8">
-              {isBirthday 
-                ? "Today is your special day! 🎉" 
-                : "Celebrating you today and always"
-              }
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              To the most amazing woman in my life, today we celebrate you and all the joy you bring to everyone around you. 
-              Your smile lights up my world, your laughter is my favorite melody, and your love is the greatest gift I could ever receive.
-            </p>
-            <div className="flex justify-center">
-              <div className="bg-pink-100 rounded-full p-3">
-                <Heart className="h-8 w-8 text-pink-600 fill-pink-600" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  /* Footer */
+  footer {
+    background: #831843;
+    color: #f9d5e5;
+    text-align: center;
+    padding: 18px 10px;
+    font-size: 1rem;
+  }
+</style>
+</head>
+<body>
 
-      {/* Memory Gallery */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-pink-700 mb-4">Beautiful Memories</h2>
-            <p className="text-gray-600">Some moments I'll cherish forever</p>
-          </div>
+<nav>
+  <div class="title" aria-label="Website title">
+    <svg viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <path d="M12 2l1.5 4.5L18 8l-3.75 3.25 1.25 4.75L12 13.5l-3.5 2.5 1.25-4.75L6 8l4.5-1.5L12 2z"></path>
+    </svg>
+    Happy Birthday
+  </div>
+</nav>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Memory 1 */}
-            <div className="bg-pink-50 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9c5e648e-07a8-4600-8ae2-1f9610b63175.png" 
-                  alt="Romantic sunset beach moment with couple walking hand in hand along the shoreline" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-pink-700 mb-2">Beach Sunset</h3>
-                <p className="text-sm text-gray-600">That beautiful evening we watched the sunset together</p>
-              </div>
-            </div>
+<section>
+  <h1>Happy Birthday, My Love!</h1>
+  <p id="birthdayMessage">Checking date...</p>
 
-            {/* Memory 2 */}
-            <div className="bg-pink-50 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/55e9dc5d-aa13-48ba-b1e7-d869adfef007.png" 
-                  alt="Couple smiling happily during a romantic candlelit dinner in an elegant restaurant" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-pink-700 mb-2">Candlelit Dinner</h3>
-                <p className="text-sm text-gray-600">Our special anniversary celebration night</p>
-              </div>
-            </div>
+  <div class="message-box">
+    To the most amazing woman in my life, today we celebrate you and all the joy you bring to everyone around you. 
+    Your smile lights up my world, your laughter is my favorite melody, and your love is the greatest gift I could ever receive.
+  </div>
+</section>
 
-            {/* Memory 3 */}
-            <div className="bg-pink-50 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/425f7a29-e0df-4dc2-872b-bd79cee61cad.png" 
-                  alt="Happy couple laughing together in a field of flowers during springtime" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-pink-700 mb-2">Spring Blooms</h3>
-                <p className="text-sm text-gray-600">Our lovely picnic among the flowers</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<section>
+  <h2>Beautiful Memories</h2>
+  <p>Some moments I'll cherish forever</p>
 
-      {/* Love Message Section */}
-      <section className="py-16 px-4 bg-gradient-to-br from-pink-100 to-rose-200">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-            <div className="mb-8">
-              <Heart className="h-12 w-12 text-pink-600 fill-pink-600 mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-bold text-pink-700 mb-4">My Heart to Yours</h2>
-            </div>
-            
-            <div className="space-y-6 text-left">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Every day with you feels like a blessing. Your kindness, your strength, and your beautiful soul continue to amaze me.
-                I feel so lucky to have you in my life and to share these precious moments together.
-              </p>
-              
-              <p className="text-lg text-gray-700 leading-relaxed">
-                On your special day, I want you to know how much you mean to me. You're not just my girlfriend - you're my best friend,
-                my partner, and the love of my life. May this year bring you all the happiness and success you deserve.
-              </p>
-              
-              <p className="text-lg text-gray-700 leading-relaxed font-semibold text-pink-700">
-                Happy Birthday, my darling. I love you more than words can express.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+  <div class="gallery" role="list">
+    <article class="gallery-item" role="listitem">
+      <img src="images/beach-sunset.png" alt="Romantic sunset beach moment with couple walking hand in hand along the shoreline" />
+      <h3>Beach Sunset</h3>
+      <p>That beautiful evening we watched the sunset together</p>
+    </article>
 
-      {/* Birthday Wishes */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <Gift className="h-12 w-12 text-pink-600 mx-auto mb-4" />
-            <h2 className="text-3xl md:text-4xl font-bold text-pink-700 mb-4">Birthday Wishes</h2>
-            <p className="text-gray-600">May all your dreams and wishes come true</p>
-          </div>
+    <article class="gallery-item" role="listitem">
+      <img src="images/candlelit-dinner.png" alt="Couple smiling happily during a romantic candlelit dinner in an elegant restaurant" />
+      <h3>Candlelit Dinner</h3>
+      <p>Our special anniversary celebration night</p>
+    </article>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-rose-50 rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="h-8 w-8 text-pink-600" />
-              </div>
-              <h3 className="font-semibold text-pink-700 mb-3">Health & Happiness</h3>
-              <p className="text-gray-700">Wishing you a year filled with good health, joy, and endless laughter</p>
-            </div>
+    <article class="gallery-item" role="listitem">
+      <img src="images/spring-blooms.png" alt="Happy couple laughing together in a field of flowers during springtime" />
+      <h3>Spring Blooms</h3>
+      <p>Our lovely picnic among the flowers</p>
+    </article>
+  </div>
+</section>
 
-            <div className="bg-rose-50 rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-pink-600 fill-pink-600" />
-              </div>
-              <h3 className="font-semibold text-pink-700 mb-3">Love & Success</h3>
-              <p className="text-gray-700">May your heart always be full of love and your path filled with success</p>
-            </div>
-          </div>
-        </div>
-      </section>
+<section>
+  <h2>My Heart to Yours</h2>
+  <div class="love-message">
+    <p>Every day with you feels like a blessing. Your kindness, your strength, and your beautiful soul continue to amaze me. I feel so lucky to have you in my life and to share these precious moments together.</p>
+    <p>On your special day, I want you to know how much you mean to me. You're not just my girlfriend - you're my best friend, my partner, and the love of my life. May this year bring you all the happiness and success you deserve.</p>
+    <p class="strong">Happy Birthday, my darling. I love you more than words can express.</p>
+  </div>
+</section>
 
-      {/* Footer */}
-      <footer className="bg-pink-700 text-white py-8 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="mb-4">Made with ❤️ for the most special person in my life</p>
-          <p className="text-pink-200">Happy Birthday, my love! 🌸</p>
-        </div>
-      </footer>
+<section>
+  <h2>Birthday Wishes</h2>
+  <div class="wishes">
+    <div class="wish-card">
+      <h3>Health &amp; Happiness</h3>
+      <p>Wishing you a year filled with good health, joy, and endless laughter</p>
     </div>
-  );
-};
+    <div class="wish-card">
+      <h3>Love &amp; Success</h3>
+      <p>May your heart always be full of love and your path filled with success</p>
+    </div>
+  </div>
+</section>
 
-export default BirthdayWishes;
+<footer>
+  Made with ❤️ for the most special person in my life. Happy Birthday, my love! 🌸
+</footer>
+
+<script>
+  // Birthday check: set month and day (0-indexed month)
+  const birthdayMonth = 8;  // September (0 = Jan, 8 = Sept)
+  const birthdayDay = 10;
+
+  const birthdayMessageEl = document.getElementById('birthdayMessage');
+
+  function updateBirthdayMessage() {
+    const today = new Date();
+    if (today.getMonth() === birthdayMonth && today.getDate() === birthdayDay) {
+      birthdayMessageEl.textContent = "Today is your special day! 🎉";
+    } else {
+      birthdayMessageEl.textContent = "Celebrating you today and always";
+    }
+  }
+
+  updateBirthdayMessage();
+
+  // Optional: Update message every minute
+  setInterval(updateBirthdayMessage, 60000);
+</script>
+
+</body>
+</html>
